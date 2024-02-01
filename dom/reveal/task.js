@@ -1,14 +1,13 @@
-let reveal=document.querySelector(".reveal");
-function playReveal (element) {
-    let {top, bottom} = reveal.getBoundingClientRect();
-    if (bottom<0) {
-        return false;
-    }
-    if (top>window.innerHeight) {
-        return false;
-    }
-    reveal.classList.add("reveal_active");
-    return true;
-}
+const reveal = document.querySelectorAll('.reveal');
 
-playReveal(reveal);
+document.addEventListener('scroll', function() {
+    reveal.forEach(element => {
+        const {
+            top,
+            bottom
+        } = element.getBoundingClientRect();
+        if (top > 0 && bottom < window.innerHeight) {
+            element.classList.add('reveal_active');
+        } else element.classList.remove('reveal_active');
+    });
+});
